@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludApp - Perfil</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #009688;
+            --secondary-color: #7FFFFF;
+            --accent-1: #DEAFAF;
+            --accent-2: #DEDEAF;
+            --secondary-1: #CBFFA9;
+            --secondary-2: #FF9B9B;
+            --secondary-3: #FFD6A5;
+        }
+
+        .app-container {
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: white;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        .top-bar {
+            background-color: var(--primary-color);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .back-button {
+            font-size: 24px;
+            margin-right: 15px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .profile-header {
+            background-color: var(--primary-color);
+            padding: 30px 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            background-color: white;
+            transition: background-color 0.2s;
+        }
+
+        .menu-item:active {
+            background-color: var(--secondary-color);
+        }
+
+        .menu-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-text {
+            flex: 1;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--primary-color);
+        }
+
+        .section-title {
+            padding: 10px 15px;
+            background-color: var(--accent-2);
+            color: #333;
+            font-weight: 500;
+        }
+
+        .badge {
+            background-color: var(--secondary-3);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <a href="home.html" class="back-button">←</a>
+            <h1>Mi Perfil</h1>
+        </div>
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div>
+                <img src="img/usuario.png" alt="Usuario" 
+                     style="border: 2px solid; border-radius: 50%; padding: 5px; width: 100px; height: 100px; object-fit: cover;" 
+                     class="mb-2 rounded">
+            </div>
+            
+            <h2 class="text-xl font-bold mb-1" id="userName">Cargando...</h2>
+            <p class="text-sm" id="userEmail">Cargando...</p>
+        </div>
+
+        <!-- Mis Datos -->
+        <div class="section-title">Mis Datos</div>
+        <div class="menu-item" onclick="editProfile()">
+            <div class="menu-icon">👤</div>
+            <div class="menu-text">Editar Perfil</div>
+            <div>→</div>
+        </div>
+        <div class="menu-item" onclick="showMedicalHistory()">
+            <div class="menu-icon">📋</div>
+            <div class="menu-text">Historial Médico</div>
+            <div>→</div>
+        </div>
+
+        <!-- Mis Medicamentos -->
+        <div class="section-title">Mis Medicamentos</div>
+        <div class="menu-item" onclick="showMedications()">
+            <div class="menu-icon">💊</div>
+            <div class="menu-text">Medicamentos Actuales</div>
+            <div class="badge">3</div>
+        </div>
+        <div class="menu-item" onclick="showPrescriptions()">
+            <div class="menu-icon">📝</div>
+            <div class="menu-text">Recetas Médicas</div>
+            <div class="badge">2</div>
+        </div>
+
+        <!-- Configuración -->
+        <div class="section-title">Configuración</div>
+        <div class="menu-item" onclick="showNotifications()">
+            <div class="menu-icon">🔔</div>
+            <div class="menu-text">Notificaciones</div>
+            <div>→</div>
+        </div>
+        <div class="menu-item" onclick="showPrivacy()">
+            <div class="menu-icon">🔒</div>
+            <div class="menu-text">Privacidad</div>
+            <div>→</div>
+        </div>
+        <div class="menu-item" onclick="logout()">
+            <div class="menu-icon">🚪</div>
+            <div class="menu-text">Cerrar Sesión</div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <span class="nav-icon">🏠</span>
+                <span>Inicio</span>
+            </a>
+            <a href="medicamentos.html" class="nav-item">
+                <span class="nav-icon">☰</span>
+                <span>Menú</span>
+            </a>
+            <a href="map.html" class="nav-item">
+                <span class="nav-icon">🗺️</span>
+                <span>Mapa</span>
+            </a>
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">👤</span>
+                <span>Perfil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // Cargar datos del usuario
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = localStorage.getItem('userData');
+            if (!userData) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const user = JSON.parse(userData);
+            document.getElementById('userName').textContent = user.fullName;
+            document.getElementById('userEmail').textContent = user.email;
+
+            // Generar inicial para el avatar
+            const initial = user.fullName.charAt(0).toUpperCase();
+            document.getElementById('profileAvatar').textContent = initial;
+        });
+
+        // Funciones de navegación
+        function editProfile() {
+            alert('Función de editar perfil - En desarrollo');
+        }
+
+        function showMedicalHistory() {
+            alert('Historial médico - En desarrollo');
+        }
+
+        function showMedications() {
+            alert('Medicamentos actuales - En desarrollo');
+        }
+
+        function showPrescriptions() {
+            alert('Recetas médicas - En desarrollo');
+        }
+
+        function showNotifications() {
+            alert('Configuración de notificaciones - En desarrollo');
+        }
+
+        function showPrivacy() {
+            alert('Configuración de privacidad - En desarrollo');
+        }
+
+        function logout() {
+            if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+                localStorage.removeItem('userData');
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>
