@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludApp - Detalle del Doctor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #009688;
+            --secondary-color: #7FFFFF;
+        }
+
+        .app-container {
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: white;
+        }
+
+        .top-bar {
+            background-color: var(--primary-color);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .back-button {
+            font-size: 24px;
+            margin-right: 15px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .clinic-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 15px;
+        }
+
+        .clinic-images img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .details-section {
+            padding: 20px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .whatsapp-button {
+            background-color: #25D366;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .description-box {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 10px;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="top-bar">
+            <a href="doctores.html" class="back-button">←</a>
+            <div class="flex items-center">
+                <h1>Detalle del Doctor</h1>
+                <img src="/api/placeholder/30/30" alt="SaludApp" class="ml-2">
+            </div>
+        </div>
+
+        <div class="clinic-images">
+            <img src="/api/placeholder/200/150" alt="Clínica 1">
+            <img src="/api/placeholder/200/150" alt="Clínica 2">
+            <img src="/api/placeholder/200/150" alt="Clínica 3">
+            <img src="/api/placeholder/200/150" alt="Clínica 4">
+        </div>
+
+        <div class="details-section">
+            <h2 class="text-xl font-bold mb-2">Especialidad: Clínica Médica</h2>
+            <p class="text-gray-600 mb-2">Farmacia San Rafael</p>
+            <p class="mb-2">Dirección: Calle de los Indices 234, Ciudad Dental Perfecta</p>
+            <p class="mb-4">Horario: 13:00 a 14:00</p>
+            <p class="price mb-4">150.000 Gs</p>
+
+            <div class="mb-4">
+                <h3 class="font-bold mb-2">Descripción de reserva</h3>
+                <textarea class="description-box" placeholder="Ingrese detalles adicionales para su reserva..."></textarea>
+            </div>
+
+            <button onclick="enviarConfirmacion()" class="whatsapp-button">
+                <span>📱</span>
+                ENVIAR CONFIRMACIÓN
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function enviarConfirmacion() {
+            const phoneNumber = '595975876601';
+            const message = `Hola! Me gustaría agendar una cita con el Dr. Juan Pérez`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl);
+        }
+    </script>
+</body>
+</html>

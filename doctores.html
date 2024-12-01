@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludApp - Doctores</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #009688;
+            --secondary-color: #7FFFFF;
+            --accent-1: #DEAFAF;
+            --accent-2: #DEDEAF;
+            --secondary-1: #CBFFA9;
+            --secondary-2: #FF9B9B;
+            --secondary-3: #FFD6A5;
+        }
+
+        .app-container {
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: white;
+            position: relative;
+        }
+
+        .top-bar {
+            background-color: var(--primary-color);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .back-button {
+            font-size: 24px;
+            margin-right: 15px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu-tabs {
+            background-color: var(--primary-color);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .menu-tab {
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        .menu-tab.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+        }
+
+        .doctor-item {
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+            background-color: var(--secondary-color);
+            margin: 10px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .doctor-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .doctor-info {
+            flex: 1;
+        }
+
+        .doctor-name {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .doctor-specialty {
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 2px;
+        }
+
+        .doctor-location {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .distance {
+            font-size: 12px;
+            color: #666;
+            position: absolute;
+            right: 15px;
+            top: 15px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--primary-color);
+        }
+
+        .search-bar {
+            padding: 10px;
+            background-color: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <a href="home.html" class="back-button">←</a>
+            <h1>Doctores</h1>
+        </div>
+
+        <!-- Menu Tabs -->
+        <div class="menu-tabs">
+            <a href="medicamentos.html" class="menu-tab">Medicamentos</a>
+            <a href="#" class="menu-tab active">Doctores</a>
+            <a href="especialidad.html" class="menu-tab">Especialidad</a>
+            <a href="farmacias.html" class="menu-tab">Farmacias</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Buscar doctor o especialidad...">
+        </div>
+
+        <!-- Doctors List -->
+        <div class="doctors-list p-2">
+            <!-- Doctor 1 -->
+            <!-- Modificar el div del doctor para hacerlo clickeable -->
+<div class="doctor-item" onclick="window.location.href='doctor-detalle.html'">
+    <img src="/api/placeholder/50/50" alt="Dr. Juan Pérez" class="doctor-image">
+    <div class="doctor-info">
+        <div class="doctor-name">Dr. Juan Pérez</div>
+        <div class="doctor-specialty">Cardiólogo</div>
+        <div class="doctor-location">Calle Medicina 123, Ciudad A</div>
+    </div>
+    <span class="distance">a 50 metros</span>
+</div>
+
+            <!-- Doctor 2 -->
+            <div class="doctor-item" onclick="showDoctorDetails(2)">
+                <img src="/api/placeholder/50/50" alt="Dra. Juana Rodriguez" class="doctor-image">
+                <div class="doctor-info">
+                    <div class="doctor-name">Dra. Juana Rodriguez</div>
+                    <div class="doctor-specialty">Dentista</div>
+                    <div class="doctor-location">Avenida Remedios 456, Ciudad B</div>
+                </div>
+                <span class="distance">a 60 metros</span>
+            </div>
+
+            <!-- Doctor 3 -->
+            <div class="doctor-item" onclick="showDoctorDetails(3)">
+                <img src="/api/placeholder/50/50" alt="Dr. Carlos Ramírez" class="doctor-image">
+                <div class="doctor-info">
+                    <div class="doctor-name">Dr. Carlos Ramírez</div>
+                    <div class="doctor-specialty">Ortopedista</div>
+                    <div class="doctor-location">Plaza de los Medicamentos 789, Ciudad del Este</div>
+                </div>
+                <span class="distance">a 120 metros</span>
+            </div>
+
+            <!-- Doctor 4 -->
+            <div class="doctor-item" onclick="showDoctorDetails(4)">
+                <img src="/api/placeholder/50/50" alt="Dra. Gimena Ayala" class="doctor-image">
+                <div class="doctor-info">
+                    <div class="doctor-name">Dra. Gimena Ayala</div>
+                    <div class="doctor-specialty">Dermatóloga</div>
+                    <div class="doctor-location">Calle Salud 200, Ciudad de la Salud</div>
+                </div>
+                <span class="distance">a 180 metros</span>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <span class="nav-icon">🏠</span>
+                <span>Inicio</span>
+            </a>
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">☰</span>
+                <span>Menú</span>
+            </a>
+            <a href="map.html" class="nav-item">
+                <span class="nav-icon">🗺️</span>
+                <span>Mapa</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="nav-icon">👤</span>
+                <span>Perfil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        function showDoctorDetails(id) {
+            // Aquí podríamos mostrar un modal con más detalles del doctor
+            const phoneNumber = '595971123456'; // Número de ejemplo
+            const message = `Hola! Me gustaría agendar una cita`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl);
+        }
+
+        // Implementación básica de búsqueda
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const doctors = document.querySelectorAll('.doctor-item');
+            
+            doctors.forEach(doctor => {
+                const doctorName = doctor.querySelector('.doctor-name').textContent.toLowerCase();
+                const doctorSpecialty = doctor.querySelector('.doctor-specialty').textContent.toLowerCase();
+                
+                if (doctorName.includes(searchTerm) || doctorSpecialty.includes(searchTerm)) {
+                    doctor.style.display = 'flex';
+                } else {
+                    doctor.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

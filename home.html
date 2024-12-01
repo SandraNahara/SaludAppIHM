@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludApp - Principal</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #009688;
+            --secondary-color: #7FFFFF;
+            --accent-1: #DEAFAF;
+            --accent-2: #DEDEAF;
+            --secondary-1: #CBFFA9;
+            --secondary-2: #FF9B9B;
+            --secondary-3: #FFD6A5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 70px; /* Espacio para la navegación inferior */
+        }
+
+        .welcome-section {
+            background-color: var(--primary-color);
+            padding: 24px 16px;
+            color: white;
+        }
+
+        .menu-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .menu-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 20px 16px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+        }
+
+        .menu-button:active {
+            transform: scale(0.98);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--primary-color);
+        }
+
+        .menu-button-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h1 class="text-2xl font-bold mb-1">Bienvenido</h1>
+            <p id="userName" class="text-xl mb-4"></p>
+            <p class="text-lg">¿Deseas buscar algo en el mapa?</p>
+        </div>
+
+        <!-- Main Menu Buttons -->
+        <div class="menu-buttons">
+            <button onclick="window.location.href='medicamentos.html'" class="menu-button">
+                <span class="menu-button-icon">💊</span>
+                Medicamentos
+            </button>
+
+            <button onclick="window.location.href='doctores.html'" class="menu-button">
+                <span class="menu-button-icon">👨‍⚕️</span>
+                Doctores
+            </button>
+
+            <button onclick="window.location.href='especialidad.html'" class="menu-button">
+                <span class="menu-button-icon">🏥</span>
+                Especialidad
+                Médica
+            </button>
+
+            <button onclick="window.location.href='farmacias.html'" class="menu-button">
+                <span class="menu-button-icon">💉</span>
+                Farmacias
+            </button>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">🏠</span>
+                <span>Inicio</span>
+            </a>
+            <a href="medicamentos.html" class="nav-item">
+                <span class="nav-icon">☰</span>
+                <span>Menú</span>
+            </a>
+            <a href="map.html" class="nav-item">
+                <span class="nav-icon">🗺️</span>
+                <span>Mapa</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="nav-icon">👤</span>
+                <span>Perfil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // Verificar si el usuario está logueado
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = localStorage.getItem('userData');
+            if (!userData) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Mostrar nombre del usuario
+            const user = JSON.parse(userData);
+            document.getElementById('userName').textContent = user.fullName;
+        });
+    </script>
+</body>
+</html>

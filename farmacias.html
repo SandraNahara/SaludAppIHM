@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludApp - Farmacias</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #009688;
+            --secondary-color: #7FFFFF;
+            --accent-1: #DEAFAF;
+            --accent-2: #DEDEAF;
+            --secondary-1: #CBFFA9;
+            --secondary-2: #FF9B9B;
+            --secondary-3: #FFD6A5;
+        }
+
+        .app-container {
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: white;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        .top-bar {
+            background-color: var(--primary-color);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .back-button {
+            font-size: 24px;
+            margin-right: 15px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu-tabs {
+            background-color: var(--primary-color);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .menu-tab {
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        .menu-tab.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+        }
+
+        .pharmacy-item {
+            display: flex;
+            padding: 15px;
+            align-items: center;
+            background-color: var(--secondary-color);
+            margin: 10px;
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .pharmacy-item:active {
+            transform: scale(0.98);
+        }
+
+        .pharmacy-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .pharmacy-info {
+            flex: 1;
+        }
+
+        .pharmacy-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .pharmacy-location {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .distance {
+            font-size: 12px;
+            color: #666;
+            position: absolute;
+            right: 15px;
+            top: 15px;
+        }
+
+        .search-bar {
+            padding: 10px;
+            background-color: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <a href="home.html" class="back-button">←</a>
+            <h1>Farmacias</h1>
+        </div>
+
+        <!-- Menu Tabs -->
+        <div class="menu-tabs">
+            <a href="medicamentos.html" class="menu-tab">Medicamentos</a>
+            <a href="doctores.html" class="menu-tab">Doctores</a>
+            <a href="especialidad.html" class="menu-tab">Especialidad</a>
+            <a href="#" class="menu-tab active">Farmacias</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Buscar farmacia...">
+        </div>
+
+        <!-- Pharmacies List -->
+        <div class="pharmacies-list">
+            <!-- Pharmacy 1 -->
+            <div class="pharmacy-item" onclick="window.location.href='farmacia-detalle.html'">
+                <img src="/api/placeholder/50/50" alt="Farmacia San Rafael" class="pharmacy-image">
+                <div class="pharmacy-info">
+                    <div class="pharmacy-name">Farmacia San Rafael</div>
+                    <div class="pharmacy-location">Calle Medicina 123, Ciudad Saludable</div>
+                </div>
+                <span class="distance">a 150 metros</span>
+            </div>
+
+            <!-- Pharmacy 2 -->
+            <div class="pharmacy-item" onclick="showPharmacyDetails(2)">
+                <img src="/api/placeholder/50/50" alt="Farmacia Santa Clara" class="pharmacy-image">
+                <div class="pharmacy-info">
+                    <div class="pharmacy-name">Farmacia Santa Clara</div>
+                    <div class="pharmacy-location">Avenida Remedios 456, Ciudad Santa</div>
+                </div>
+                <span class="distance">a 230 metros</span>
+            </div>
+
+            <!-- Pharmacy 3 -->
+            <div class="pharmacy-item" onclick="showPharmacyDetails(3)">
+                <img src="/api/placeholder/50/50" alt="Farmacia San Juan" class="pharmacy-image">
+                <div class="pharmacy-info">
+                    <div class="pharmacy-name">Farmacia San Juan</div>
+                    <div class="pharmacy-location">Plaza de los Medicamentos 789, Ciudad del Este</div>
+                </div>
+                <span class="distance">a 230 metros</span>
+            </div>
+
+            <!-- Pharmacy 4 -->
+            <div class="pharmacy-item" onclick="showPharmacyDetails(4)">
+                <img src="/api/placeholder/50/50" alt="Farmacia Nuestra Señora" class="pharmacy-image">
+                <div class="pharmacy-info">
+                    <div class="pharmacy-name">Farmacia Nuestra Señora</div>
+                    <div class="pharmacy-location">Calle Salud 101, Ciudad de la Salud</div>
+                </div>
+                <span class="distance">a 250 metros</span>
+            </div>
+
+            <!-- Pharmacy 5 -->
+            <div class="pharmacy-item" onclick="showPharmacyDetails(5)">
+                <img src="/api/placeholder/50/50" alt="Farmacia San Antonio" class="pharmacy-image">
+                <div class="pharmacy-info">
+                    <div class="pharmacy-name">Farmacia San Antonio</div>
+                    <div class="pharmacy-location">Avenida Pastillas 567, Ciudad Medicinal</div>
+                </div>
+                <span class="distance">a 700 metros</span>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <span class="nav-icon">🏠</span>
+                <span>Inicio</span>
+            </a>
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">☰</span>
+                <span>Menú</span>
+            </a>
+            <a href="map.html" class="nav-item">
+                <span class="nav-icon">🗺️</span>
+                <span>Mapa</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="nav-icon">👤</span>
+                <span>Perfil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        function showPharmacyDetails(id) {
+            // Aquí podríamos mostrar más detalles de la farmacia
+            // o abrir el chat de WhatsApp
+            const phoneNumber = '595971123456'; // Número de ejemplo
+            const message = `Hola! Me gustaría consultar sobre la disponibilidad de medicamentos`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl);
+        }
+
+        // Búsqueda en tiempo real
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const pharmacies = document.querySelectorAll('.pharmacy-item');
+            
+            pharmacies.forEach(pharmacy => {
+                const pharmacyName = pharmacy.querySelector('.pharmacy-name').textContent.toLowerCase();
+                const pharmacyLocation = pharmacy.querySelector('.pharmacy-location').textContent.toLowerCase();
+                
+                if (pharmacyName.includes(searchTerm) || pharmacyLocation.includes(searchTerm)) {
+                    pharmacy.style.display = 'flex';
+                } else {
+                    pharmacy.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
